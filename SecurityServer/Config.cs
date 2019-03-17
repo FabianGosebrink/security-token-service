@@ -50,40 +50,42 @@ namespace StsServerIdentity
 
             return new List<Client>
             {
-                // example code
-                //new Client
-                //{
-                //    ClientName = "angularclient",
-                //    ClientId = "angularclient",
-                //    AccessTokenType = AccessTokenType.Reference,
-                //    AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
-                //    IdentityTokenLifetime = 30,
-                //    AllowedGrantTypes = GrantTypes.Implicit,
-                //    AllowAccessTokensViaBrowser = true,
-                //    RedirectUris = new List<string>
-                //    {
-                //        "https://localhost:44311",
-                //        "https://localhost:44311/silent-renew.html"
+                 new Client
+                {
+                    ClientName = "angularClient",
+                    ClientId = "angularClient",
+                    AccessTokenType = AccessTokenType.Reference,
+                    // RequireConsent = false,
+                    AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
+                    IdentityTokenLifetime = 30,
 
-                //    },
-                //    PostLogoutRedirectUris = new List<string>
-                //    {
-                //        "https://localhost:44311/unauthorized",
-                //        "https://localhost:44311"
-                //    },
-                //    AllowedCorsOrigins = new List<string>
-                //    {
-                //        "https://localhost:44311",
-                //        "http://localhost:44311"
-                //    },
-                //    AllowedScopes = new List<string>
-                //    {
-                //        "openid",
-                //        "role",
-                //        "profile",
-                //        "email"
-                //    }
-                //}
+                    RequireClientSecret = false,
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = true,
+
+                    AllowAccessTokensViaBrowser = true,
+                    RedirectUris = new List<string>
+                    {
+                        "https://localhost:4200",
+                        "https://localhost:4200/silent-renew.html"
+                    },
+                    PostLogoutRedirectUris = new List<string>
+                    {
+                        "https://localhost:4200/unauthorized",
+                        "https://localhost:4200"
+                    },
+                    AllowedCorsOrigins = new List<string>
+                    {
+                        "https://localhost:4200"
+                    },
+                    AllowedScopes = new List<string>
+                    {
+                        "openid",
+                        "role",
+                        "profile",
+                        "email"
+                    }
+                },
             };
         }
     }
