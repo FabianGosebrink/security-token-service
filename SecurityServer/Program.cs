@@ -43,6 +43,13 @@ namespace StsServerIdentity
                     .ReadFrom.Configuration(hostingContext.Configuration)
                     .Enrich.FromLogContext()
                     .WriteTo.Console(theme: AnsiConsoleTheme.Code)
+                    .WriteTo.File(
+                      //$@"../logssts.txt",
+                      $@"D:\home\LogFiles\Application\{Environment.UserDomainName}.txt",
+                      fileSizeLimitBytes: 1_000_000,
+                      rollOnFileSizeLimit: true,
+                      shared: true,
+                      flushToDiskInterval: TimeSpan.FromSeconds(1))
                 );
     }
 }

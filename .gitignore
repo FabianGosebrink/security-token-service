@@ -2,3 +2,5 @@
 /SecurityServer/bin/
 /SecurityServer/node_modules/
 /SecurityServer/obj
+
+/.vs
