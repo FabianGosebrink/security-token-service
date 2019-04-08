@@ -24,22 +24,22 @@ namespace StsServerIdentity
             return new List<ApiResource>
             {
                 // example code
-                //new ApiResource("dataEventRecords")
-                //{
-                //    ApiSecrets =
-                //    {
-                //        new Secret("dataEventRecordsSecret".Sha256())
-                //    },
-                //    Scopes =
-                //    {
-                //        new Scope
-                //        {
-                //            Name = "dataeventrecords",
-                //            DisplayName = "Scope for the dataEventRecords ApiResource"
-                //        }
-                //    },
-                //    UserClaims = { "role", "admin", "user", "dataEventRecords", "dataEventRecords.admin", "dataEventRecords.user" }
-                //}
+                new ApiResource("talerApi")
+                {
+                    ApiSecrets =
+                    {
+                        new Secret("talerApiSecret".Sha256())
+                    },
+                    Scopes =
+                    {
+                        new Scope
+                        {
+                            Name = "talerApi",
+                            DisplayName = "Scope for the taler ApiResource"
+                        }
+                    },
+                    UserClaims = { "role", "admin", "user", "talerApiSecret", "talerApiSecret.admin", "talerApiSecret.user" }
+                }
             };
         }
 
@@ -50,10 +50,47 @@ namespace StsServerIdentity
 
             return new List<Client>
             {
-                 new Client
+                new Client
                 {
                     ClientName = "angularClient",
                     ClientId = "angularClient",
+                    AccessTokenType = AccessTokenType.Reference,
+                    // RequireConsent = false,
+                    AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
+                    IdentityTokenLifetime = 30,
+
+                    RequireClientSecret = false,
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = true,
+
+                    AllowAccessTokensViaBrowser = true,
+                    RedirectUris = new List<string>
+                    {
+                        "https://localhost:4200",
+                        "https://localhost:4200/silent-renew.html"
+                    },
+                    PostLogoutRedirectUris = new List<string>
+                    {
+                        "https://localhost:4200/unauthorized",
+                        "https://localhost:4200"
+                    },
+                    AllowedCorsOrigins = new List<string>
+                    {
+                        "https://localhost:4200"
+                    },
+                    AllowedScopes = new List<string>
+                    {
+                        "openid",
+                        "role",
+                        "profile",
+                        "email"
+                    }
+                },
+
+                new Client
+                {
+                    ClientName = "talerClient",
+                    ClientId = "talerClient",
                     AccessTokenType = AccessTokenType.Reference,
                     // RequireConsent = false,
                     AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
