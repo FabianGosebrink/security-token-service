@@ -34,7 +34,7 @@ namespace StsServerIdentity
                     {
                         new Scope
                         {
-                            Name = "talerApi",
+                            Name = "taler_api",
                             DisplayName = "Scope for the taler ApiResource"
                         }
                     },
@@ -120,7 +120,8 @@ namespace StsServerIdentity
                         "openid",
                         "role",
                         "profile",
-                        "email"
+                        "email",
+                        "taler_api"
                     }
                 },
             };
