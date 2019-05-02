@@ -24,6 +24,7 @@ using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Sinks.SystemConsole.Themes;
 using StsServerIdentity.Filters;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StsServerIdentity
 {
@@ -72,6 +73,15 @@ namespace StsServerIdentity
                      options.ClientId = "99eb0b9d-ca40-476e-b5ac-6f4c32bfb530";
                      options.CallbackPath = "/signin-oidc";
                  });
+
+            services.AddSingleton<IAuthorizationHandler, IsAdminHandler>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("IsAdminRequirementPolicy", policyIsAdminRequirement =>
+                {
+                    policyIsAdminRequirement.Requirements.Add(new IsAdminRequirement());
+                });
+            });
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
