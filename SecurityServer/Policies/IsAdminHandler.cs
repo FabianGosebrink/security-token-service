@@ -13,7 +13,7 @@ namespace StsServerIdentity
             if (requirement == null)
                 throw new ArgumentNullException(nameof(requirement));
 
-            if (context.User.Identity.Name != null && context.User.Identity.Name.ToLower() == "fabian.gosebrink@outlook.com")
+            if (context.User.Identity.Name != null && context.User.Identity.Name.ToLower() == "damien_bod@hotmail.com")
             {
                 context.Succeed(requirement);
             }
