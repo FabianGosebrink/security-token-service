@@ -1,6 +1,10 @@
 ﻿using System;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Azure.KeyVault;
+using Microsoft.Azure.Services.AppAuthentication;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
@@ -21,7 +25,7 @@ namespace StsServerIdentity
             try
             {
                 Log.Information("Starting web host");
-                CreateWebHostBuilder(args).Build().Run();
+                CreateHostBuilder(args).Build().Run();
                 return 0;
             }
             catch (Exception ex)
@@ -35,21 +39,37 @@ namespace StsServerIdentity
             }
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .UseKestrel(c => c.AddServerHeader = false)
-                .UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
-                    .ReadFrom.Configuration(hostingContext.Configuration)
-                    .Enrich.FromLogContext()
-                    .WriteTo.Console(theme: AnsiConsoleTheme.Code)
-                    .WriteTo.File(
-                      //$@"../logssts.txt",
-                      $@"D:\home\LogFiles\Application\{Environment.UserDomainName}.txt",
-                      fileSizeLimitBytes: 1_000_000,
-                      rollOnFileSizeLimit: true,
-                      shared: true,
-                      flushToDiskInterval: TimeSpan.FromSeconds(1))
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((context, config) =>
+                {
+                    var builder = config.Build();
+                    var keyVaultEndpoint = builder["AzureKeyVaultEndpoint"];
+                    if (!string.IsNullOrEmpty(keyVaultEndpoint))
+                    {
+                        var azureServiceTokenProvider = new AzureServiceTokenProvider();
+                        var keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback));
+
+                        config.AddAzureKeyVault(keyVaultEndpoint);
+                    }
+                    else
+                    {
+                        IHostEnvironment env = context.HostingEnvironment;
+
+                        config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                            .AddEnvironmentVariables()
+                            .AddUserSecrets("2c080c8e-2aef-4210-af6c-a633b70561cd");
+                    }
+                })
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>()
+                        .UseSerilog((hostingContext, loggerConfiguration) => loggerConfiguration
+                        .ReadFrom.Configuration(hostingContext.Configuration)
+                        .Enrich.FromLogContext()
+                        .WriteTo.Console(theme: AnsiConsoleTheme.Code)
                 );
+            });
     }
 }
