@@ -25,6 +25,7 @@ using StsServerIdentity.Services.Certificate;
 using Serilog;
 using Microsoft.AspNetCore.Http;
 using Fido2NetLib;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StsServerIdentity
 {
@@ -91,6 +92,15 @@ namespace StsServerIdentity
                      options.CallbackPath = "/signin-microsoft";
                      options.Prompt = "login"; // login, consent
                  });
+
+            services.AddSingleton<IAuthorizationHandler, IsAdminHandler>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("IsAdminRequirementPolicy", policyIsAdminRequirement =>
+                {
+                    policyIsAdminRequirement.Requirements.Add(new IsAdminRequirement());
+                });
+            });
 
             services.AddAntiforgery(options =>
             {

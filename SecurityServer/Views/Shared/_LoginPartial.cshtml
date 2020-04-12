@@ -1,10 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using StsServerIdentity.Models
 @using StsServerIdentity.Resources
+@using Microsoft.AspNetCore.Authorization
 @inject LocService SharedLocalizer
-
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+@inject IAuthorizationService AuthorizationService
+@inject LocService SharedLocalize
 
 @if (SignInManager.IsSignedIn(User))
 {
@@ -25,7 +27,10 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">@SharedLocalizer.GetLocalizedHtmlString("REGISTER")</a></li>
+        @if ((await AuthorizationService.AuthorizeAsync(User, "IsAdminRequirementPolicy")).Succeeded)
+        {
+            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Add a user</a></li>
+        }
         <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">@SharedLocalizer.GetLocalizedHtmlString("ACCOUNT_LOGIN")</a></li>
     </ul>
 }

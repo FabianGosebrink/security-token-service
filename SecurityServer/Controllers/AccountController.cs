@@ -297,6 +297,7 @@ namespace StsServerIdentity.Controllers
         // GET: /Account/Register
         [HttpGet]
         [AllowAnonymous]
+        [Authorize(AuthenticationSchemes = "Identity.Application", Policy = "IsAdminRequirementPolicy")]
         public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -308,6 +309,7 @@ namespace StsServerIdentity.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Authorize(AuthenticationSchemes = "Identity.Application", Policy = "IsAdminRequirementPolicy")]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
