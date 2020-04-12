@@ -84,29 +84,29 @@ namespace StsServerIdentity
                 .AddDefaultTokenProviders()
                 .AddTokenProvider<Fifo2UserTwoFactorTokenProvider>("FIDO2");
 
-            services.AddAuthentication()
-                 .AddOpenIdConnect("aad", "Login with Azure AD", options => // Microsoft common
-                 {
-                     //  https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration
-                     options.ClientId = "your_client_id"; // ADD APP Registration ID
-                     options.ClientSecret = "your_secret"; // ADD APP Registration secret
-                     options.SignInScheme = "Identity.External";
-                     options.RemoteAuthenticationTimeout = TimeSpan.FromSeconds(30);
-                     options.Authority = "https://login.microsoftonline.com/common/v2.0/";
-                     options.ResponseType = "code";
-                     options.UsePkce = false; // live does not support this yet
-                     options.Scope.Add("profile");
-                     options.Scope.Add("email");
-                     options.TokenValidationParameters = new TokenValidationParameters
-                     {
-                         // ALWAYS VALIDATE THE ISSUER IF POSSIBLE !!!!
-                         ValidateIssuer = false,
-                         // ValidIssuers = new List<string> { "tenant..." },
-                         NameClaimType = "email",
-                     };
-                     options.CallbackPath = "/signin-microsoft";
-                     options.Prompt = "login"; // login, consent
-                 });
+            services.AddAuthentication();
+                 //.AddOpenIdConnect("aad", "Login with Azure AD", options => // Microsoft common
+                 //{
+                 //    //  https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration
+                 //    options.ClientId = "your_client_id"; // ADD APP Registration ID
+                 //    options.ClientSecret = "your_secret"; // ADD APP Registration secret
+                 //    options.SignInScheme = "Identity.External";
+                 //    options.RemoteAuthenticationTimeout = TimeSpan.FromSeconds(30);
+                 //    options.Authority = "https://login.microsoftonline.com/common/v2.0/";
+                 //    options.ResponseType = "code";
+                 //    options.UsePkce = false; // live does not support this yet
+                 //    options.Scope.Add("profile");
+                 //    options.Scope.Add("email");
+                 //    options.TokenValidationParameters = new TokenValidationParameters
+                 //    {
+                 //        // ALWAYS VALIDATE THE ISSUER IF POSSIBLE !!!!
+                 //        ValidateIssuer = false,
+                 //        // ValidIssuers = new List<string> { "tenant..." },
+                 //        NameClaimType = "email",
+                 //    };
+                 //    options.CallbackPath = "/signin-microsoft";
+                 //    options.Prompt = "login"; // login, consent
+                 //});
 
             services.AddSingleton<IAuthorizationHandler, IsAdminHandler>();
             services.AddAuthorization(options =>
