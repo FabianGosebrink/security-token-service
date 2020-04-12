@@ -276,7 +276,7 @@ namespace StsServerIdentity
                     var supportedCultures = new List<CultureInfo>
                         {
                             new CultureInfo("en-US"),
-                            new CultureInfo("de-DE"),
+                            //new CultureInfo("de-DE"),
                             new CultureInfo("de-CH"),
                             new CultureInfo("it-IT"),
                             new CultureInfo("gsw-CH"),
@@ -286,7 +286,7 @@ namespace StsServerIdentity
                             new CultureInfo("es-MX")
                         };
 
-                    options.DefaultRequestCulture = new RequestCulture(culture: "de-DE", uiCulture: "de-DE");
+                    options.DefaultRequestCulture = new RequestCulture(culture: "de-CH", uiCulture: "de-CH");
                     options.SupportedCultures = supportedCultures;
                     options.SupportedUICultures = supportedCultures;
 
