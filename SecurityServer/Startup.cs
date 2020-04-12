@@ -63,6 +63,21 @@ namespace StsServerIdentity
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(_configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder
+                            .AllowCredentials()
+                            .WithOrigins(
+                                "https://localhost:4200")
+                            .SetIsOriginAllowedToAllowWildcardSubdomains()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
+
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddErrorDescriber<StsIdentityErrorDescriber>()
@@ -177,7 +192,7 @@ namespace StsServerIdentity
                 .StyleSources(s => s.Self())
                 .StyleSources(s => s.UnsafeInline())
                 .FontSources(s => s.Self())
-                .FrameAncestors(s => s.Self())
+                .FrameAncestors(s => s.CustomSources("https://localhost:4200"))
                 .ImageSources(imageSrc => imageSrc.Self())
                 .ImageSources(imageSrc => imageSrc.CustomSources("data:"))
                 .ScriptSources(s => s.Self())
@@ -213,6 +228,7 @@ namespace StsServerIdentity
 
             app.UseRouting();
 
+            app.UseCors("AllowAllOrigins");
             app.UseIdentityServer();
             app.UseAuthorization();
 
