@@ -26,6 +26,7 @@ using Serilog;
 using Microsoft.AspNetCore.Http;
 using Fido2NetLib;
 using Microsoft.AspNetCore.Authorization;
+using StsServerIdentity.Model;
 
 namespace StsServerIdentity
 {
@@ -46,6 +47,7 @@ namespace StsServerIdentity
             services.Configure<EmailSettings>(_configuration.GetSection("EmailSettings"));
             services.AddTransient<IProfileService, IdentityWithAdditionalClaimsProfileService>();
             services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<ClientAppSettings>(_configuration.GetSection("ClientAppSettings"));
 
             services.Configure<CookiePolicyOptions>(options =>
             {
