@@ -73,7 +73,10 @@ namespace StsServerIdentity
                         builder
                             .AllowCredentials()
                             .WithOrigins(
-                                "https://localhost:4200")
+                                "https://localhost:4200", 
+                                "https://localhost:4201", 
+                                "https://localhost:4202", 
+                                "https://localhost:4203")
                             .SetIsOriginAllowedToAllowWildcardSubdomains()
                             .AllowAnyHeader()
                             .AllowAnyMethod();
@@ -194,7 +197,7 @@ namespace StsServerIdentity
                 .StyleSources(s => s.Self())
                 .StyleSources(s => s.UnsafeInline())
                 .FontSources(s => s.Self())
-                .FrameAncestors(s => s.CustomSources("https://localhost:4200"))
+                .FrameAncestors(s => s.CustomSources("https://localhost:4200", "https://localhost:4201", "https://localhost:4202", "https://localhost:4203"))
                 .ImageSources(imageSrc => imageSrc.Self())
                 .ImageSources(imageSrc => imageSrc.CustomSources("data:"))
                 .ScriptSources(s => s.Self())
