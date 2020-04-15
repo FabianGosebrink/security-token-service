@@ -104,16 +104,21 @@ namespace StsServerIdentity
                     RedirectUris = new List<string>
                     {
                         "https://localhost:4200",
-                        "https://localhost:4200/silent-renew.html"
+                        "https://localhost:4200/silent-renew.html",
+                        "https://localhost:4201",
+                        "https://localhost:4201/silent-renew.html"
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
                         "https://localhost:4200/unauthorized",
-                        "https://localhost:4200"
+                        "https://localhost:4200",
+                        "https://localhost:4201/unauthorized",
+                        "https://localhost:4201"
                     },
                     AllowedCorsOrigins = new List<string>
                     {
-                        "https://localhost:4200"
+                        "https://localhost:4200",
+                        "https://localhost:4201"
                     },
                     AllowedScopes = new List<string>
                     {
@@ -122,6 +127,78 @@ namespace StsServerIdentity
                         "profile",
                         "email",
                         "taler_api"
+                    }
+                },
+                new Client
+                {
+                    ClientName = "angularImplicitClient",
+                    ClientId = "angularImplicitClient",
+                    AccessTokenType = AccessTokenType.Reference,
+                    // RequireConsent = false,
+                    AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
+                    IdentityTokenLifetime = 30,
+
+                    RequireClientSecret = false,
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    RequirePkce = true,
+
+                    AllowAccessTokensViaBrowser = true,
+                    RedirectUris = new List<string>
+                    {
+                        "https://localhost:4202",
+                        "https://localhost:4202/silent-renew.html"
+                    },
+                    PostLogoutRedirectUris = new List<string>
+                    {
+                        "https://localhost:4202/unauthorized",
+                        "https://localhost:4202"
+                    },
+                    AllowedCorsOrigins = new List<string>
+                    {
+                        "https://localhost:4202"
+                    },
+                    AllowedScopes = new List<string>
+                    {
+                        "openid",
+                        "role",
+                        "profile",
+                        "email"
+                    }
+                },
+                new Client
+                {
+                    ClientName = "angularJwtClient",
+                    ClientId = "angularJwtClient",
+                    AccessTokenType = AccessTokenType.Jwt,
+                    // RequireConsent = false,
+                    AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
+                    IdentityTokenLifetime = 30,
+
+                    RequireClientSecret = false,
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = true,
+
+                    AllowAccessTokensViaBrowser = true,
+                    RedirectUris = new List<string>
+                    {
+                        "https://localhost:4203",
+                        "https://localhost:4203/silent-renew.html"
+                    },
+                    PostLogoutRedirectUris = new List<string>
+                    {
+                        "https://localhost:4203/unauthorized",
+                        "https://localhost:4203"
+                    },
+                    AllowedCorsOrigins = new List<string>
+                    {
+                        "https://localhost:4203"
+                    },
+                    AllowedScopes = new List<string>
+                    {
+                        "openid",
+                        "role",
+                        "profile",
+                        "email"
                     }
                 },
             };
