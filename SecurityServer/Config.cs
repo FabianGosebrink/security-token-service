@@ -207,7 +207,7 @@ namespace StsServerIdentity
                     ClientName = "angularCodeRefreshTokens(Code with PKCE)",
 
                     AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
-                    IdentityTokenLifetime = 120,
+                    IdentityTokenLifetime = 45,
 
                     AllowAccessTokensViaBrowser = true,
                     RedirectUris = new List<string>
