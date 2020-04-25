@@ -52,7 +52,7 @@ namespace StsServerIdentity
             {
                 new Client
                 {
-                    ClientName = "angularClient",
+                    ClientName = "Code Flow PKCE",
                     ClientId = "angularClient",
                     AccessTokenType = AccessTokenType.Reference,
                     // RequireConsent = false,
@@ -89,7 +89,7 @@ namespace StsServerIdentity
 
                 new Client
                 {
-                    ClientName = "talerClient",
+                    ClientName = "Code Flow PKCE Reference Token",
                     ClientId = "talerClient",
                     AccessTokenType = AccessTokenType.Reference,
                     // RequireConsent = false,
@@ -131,7 +131,7 @@ namespace StsServerIdentity
                 },
                 new Client
                 {
-                    ClientName = "angularImplicitClient",
+                    ClientName = "Implicit Flow Reference Token",
                     ClientId = "angularImplicitClient",
                     AccessTokenType = AccessTokenType.Reference,
                     // RequireConsent = false,
@@ -167,7 +167,7 @@ namespace StsServerIdentity
                 },
                 new Client
                 {
-                    ClientName = "angularJwtClient",
+                    ClientName = "Implicit Flow JWT Token",
                     ClientId = "angularJwtClient",
                     AccessTokenType = AccessTokenType.Jwt,
                     // RequireConsent = false,
@@ -203,8 +203,8 @@ namespace StsServerIdentity
                 },
                 new Client
                 {
+                    ClientName = "Code Flow Refresh Tokens(Code with PKCE)",
                     ClientId = "angularCodeRefreshTokens",
-                    ClientName = "angularCodeRefreshTokens(Code with PKCE)",
 
                     AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
                     IdentityTokenLifetime = 45,
