@@ -158,8 +158,8 @@ namespace StsServerIdentity
                 //.AddSigningCredential(x509Certificate2Certs.ActiveCertificate) // RS256
                 //.AddSigningCredential(rsaSecurityKey, "RS384")
                 //.AddSigningCredential(rsaSecurityKey, "RS512")
-                //.AddSigningCredential(eCDsaSecurityKey, "ES256") // ecdsaCertificate
-                .AddSigningCredential(eCDsaSecurityKey, "ES384") // ecdsaCertificate
+                .AddSigningCredential(eCDsaSecurityKey, "ES256") // ecdsaCertificate
+                //.AddSigningCredential(eCDsaSecurityKey, "ES384") // ecdsaCertificate
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiResources(Config.GetApiResources())
                 .AddInMemoryClients(Config.GetClients(stsConfig))
@@ -280,8 +280,8 @@ namespace StsServerIdentity
                 // DevelopmentCertificatePfx = Path.Combine(environment.ContentRootPath, "cert_rsa256.pfx"),
                 // DevelopmentCertificatePfx = Path.Combine(environment.ContentRootPath, "cert_rsa384.pfx"),
                 // DevelopmentCertificatePfx = Path.Combine(environment.ContentRootPath, "cert_rsa512.pfx"),
-                DevelopmentCertificatePfx = Path.Combine(environment.ContentRootPath, "cert_ecdsa384.pfx"),
-                // DevelopmentCertificatePfx = Path.Combine(environment.ContentRootPath, "cert_ecdsa256.pfx"),
+                // DevelopmentCertificatePfx = Path.Combine(environment.ContentRootPath, "cert_ecdsa384.pfx"),
+                DevelopmentCertificatePfx = Path.Combine(environment.ContentRootPath, "cert_ecdsa256.pfx"),
                 DevelopmentCertificatePassword = "1234" //configuration["DevelopmentCertificatePassword"] //"1234",
             };
 
