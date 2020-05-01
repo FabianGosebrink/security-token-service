@@ -39,6 +39,23 @@ namespace StsServerIdentity
                         }
                     },
                     UserClaims = { "role", "admin", "user", "talerApiSecret", "talerApiSecret.admin", "talerApiSecret.user" }
+                },
+                // example code
+                new ApiResource("gettogetherapi")
+                {
+                    ApiSecrets =
+                    {
+                        new Secret("gettogetherapiSecret".Sha256())
+                    },
+                    Scopes =
+                    {
+                        new Scope
+                        {
+                            Name = "gettogether_api",
+                            DisplayName = "Scope for the getogether ApiResource"
+                        }
+                    },
+                    UserClaims = { "role", "admin", "user", "gettogetherapiSecret", "gettogetherapiSecret.admin", "gettogetherapiSecret.user" }
                 }
             };
         }
@@ -223,6 +240,40 @@ namespace StsServerIdentity
                     AllowedCorsOrigins = new List<string>
                     {
                         "https://localhost:4204"
+                    },
+
+                    RequireClientSecret = false,
+
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = true,
+                    AllowedScopes = { "openid", "profile", "email", "taler_api" },
+
+                    AllowOfflineAccess = true,
+                    RefreshTokenUsage = TokenUsage.OneTimeOnly
+                 },
+
+                new Client
+                {
+                    ClientName = "get together app",
+                    ClientId = "gettogetherapp",
+
+                    AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
+                    IdentityTokenLifetime = 45,
+
+                    AllowAccessTokensViaBrowser = true,
+                    RedirectUris = new List<string>
+                    {
+                        "https://localhost:4200",
+                        "https://localhost:4200/silent-renew.html"
+                    },
+                    PostLogoutRedirectUris = new List<string>
+                    {
+                        "https://localhost:4200/unauthorized",
+                        "https://localhost:4200"
+                    },
+                    AllowedCorsOrigins = new List<string>
+                    {
+                        "https://localhost:4200"
                     },
 
                     RequireClientSecret = false,
