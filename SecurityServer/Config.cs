@@ -229,8 +229,7 @@ namespace StsServerIdentity
                     AllowAccessTokensViaBrowser = true,
                     RedirectUris = new List<string>
                     {
-                        "https://localhost:4204",
-                        "https://localhost:4204/silent-renew.html"
+                        "https://localhost:4204"
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
@@ -257,14 +256,13 @@ namespace StsServerIdentity
                     ClientName = "get together app",
                     ClientId = "gettogetherapp",
 
-                    AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
-                    IdentityTokenLifetime = 45,
+                    AccessTokenLifetime = 180,
+                    IdentityTokenLifetime = 120,
 
                     AllowAccessTokensViaBrowser = true,
                     RedirectUris = new List<string>
                     {
-                        "https://localhost:4200",
-                        "https://localhost:4200/silent-renew.html"
+                        "https://localhost:4200"
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
