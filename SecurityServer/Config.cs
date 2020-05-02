@@ -229,8 +229,7 @@ namespace StsServerIdentity
                     AllowAccessTokensViaBrowser = true,
                     RedirectUris = new List<string>
                     {
-                        "https://localhost:4204",
-                        "https://localhost:4204/silent-renew.html"
+                        "https://localhost:4204"
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
@@ -263,8 +262,7 @@ namespace StsServerIdentity
                     AllowAccessTokensViaBrowser = true,
                     RedirectUris = new List<string>
                     {
-                        "https://localhost:4200",
-                        "https://localhost:4200/silent-renew.html"
+                        "https://localhost:4200"
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
