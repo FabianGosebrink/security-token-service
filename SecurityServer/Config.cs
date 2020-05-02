@@ -257,8 +257,8 @@ namespace StsServerIdentity
                     ClientName = "get together app",
                     ClientId = "gettogetherapp",
 
-                    AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
-                    IdentityTokenLifetime = 45,
+                    AccessTokenLifetime = 660,
+                    IdentityTokenLifetime = 600,
 
                     AllowAccessTokensViaBrowser = true,
                     RedirectUris = new List<string>
@@ -283,7 +283,7 @@ namespace StsServerIdentity
                     AllowedScopes = { "openid", "profile", "email", "taler_api" },
 
                     AllowOfflineAccess = true,
-                    RefreshTokenUsage = TokenUsage.OneTimeOnly
+                    RefreshTokenUsage = TokenUsage.OneTimeOnly,
                  }
             };
         }
