@@ -278,7 +278,7 @@ namespace StsServerIdentity
 
                     AllowedGrantTypes = GrantTypes.Code,
                     RequirePkce = true,
-                    AllowedScopes = { "openid", "profile", "email", "taler_api" },
+                    AllowedScopes = { "openid", "profile", "email", "gettogether_api" },
 
                     AllowOfflineAccess = true,
                     RefreshTokenUsage = TokenUsage.OneTimeOnly,
