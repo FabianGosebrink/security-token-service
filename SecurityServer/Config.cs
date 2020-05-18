@@ -56,7 +56,24 @@ namespace StsServerIdentity
                         }
                     },
                     UserClaims = { "role", "admin", "user", "gettogetherapiSecret", "gettogetherapiSecret.admin", "gettogetherapiSecret.user" }
-                }
+                },
+                 // example code
+                new ApiResource("hoorayApi")
+                {
+                    ApiSecrets =
+                    {
+                        new Secret("hoorayApiSecret".Sha256())
+                    },
+                    Scopes =
+                    {
+                        new Scope
+                        {
+                            Name = "hooray_Api",
+                            DisplayName = "Scope for the hoorayApi Resource"
+                        }
+                    },
+                    UserClaims = { "role", "admin", "user", "hoorayApiSecret", "hoorayApiSecret.admin", "hoorayApiSecret.user" }
+                },
             };
         }
 
@@ -282,7 +299,40 @@ namespace StsServerIdentity
 
                     AllowOfflineAccess = true,
                     RefreshTokenUsage = TokenUsage.OneTimeOnly,
-                 }
+                 },
+
+                 new Client
+                {
+                    ClientName = "Code Flow with refresh tokens",
+                    ClientId = "angularClientForHoorayApi",
+
+                    AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
+                    IdentityTokenLifetime = 45,
+
+                    AllowAccessTokensViaBrowser = true,
+                    RedirectUris = new List<string>
+                    {
+                        "https://localhost:4200"
+                    },
+                    PostLogoutRedirectUris = new List<string>
+                    {
+                        "https://localhost:4200/unauthorized",
+                        "https://localhost:4200"
+                    },
+                    AllowedCorsOrigins = new List<string>
+                    {
+                        "https://localhost:4200"
+                    },
+
+                    RequireClientSecret = false,
+
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = true,
+                    AllowedScopes = { "openid", "profile", "email", "hooray_Api" },
+
+                    AllowOfflineAccess = true,
+                    RefreshTokenUsage = TokenUsage.OneTimeOnly
+                },
             };
         }
     }
