@@ -279,7 +279,9 @@ namespace StsServerIdentity
                     AllowAccessTokensViaBrowser = true,
                     RedirectUris = new List<string>
                     {
-                        "https://localhost:4200"
+                        "https://localhost:4200",
+                        "http://localhost/callback", // electron,
+                        "https://localhost/callback" // electron
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
