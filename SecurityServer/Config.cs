@@ -281,16 +281,19 @@ namespace StsServerIdentity
                     {
                         "https://localhost:4200",
                         "http://localhost/callback", // electron,
-                        "https://localhost/callback" // electron
+                        "https://localhost/callback",  // electron
+                        "https://proud-island-014203c10.azurestaticapps.net"
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
                         "https://localhost:4200/unauthorized",
-                        "https://localhost:4200"
+                        "https://localhost:4200",
+                        "https://proud-island-014203c10.azurestaticapps.net"
                     },
                     AllowedCorsOrigins = new List<string>
                     {
-                        "https://localhost:4200"
+                        "https://localhost:4200",
+                        "https://proud-island-014203c10.azurestaticapps.net"
                     },
 
                     RequireClientSecret = false,
