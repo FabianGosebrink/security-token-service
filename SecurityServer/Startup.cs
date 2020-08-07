@@ -77,7 +77,8 @@ namespace StsServerIdentity
                                 "https://localhost:4201", 
                                 "https://localhost:4202", 
                                 "https://localhost:4203",
-                                "https://localhost:4204")
+                                "https://localhost:4204",
+                                "https://proud-island-014203c10.azurestaticapps.net")
                             .SetIsOriginAllowedToAllowWildcardSubdomains()
                             .AllowAnyHeader()
                             .AllowAnyMethod();
