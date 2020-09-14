@@ -71,16 +71,9 @@ namespace StsServerIdentity
                     builder =>
                     {
                         builder
-                            .AllowCredentials()
-                            .WithOrigins(
-                                "https://localhost:4200", 
-                                "https://localhost:4201", 
-                                "https://localhost:4202", 
-                                "https://localhost:4203",
-                                "https://localhost:4204")
-                            .SetIsOriginAllowedToAllowWildcardSubdomains()
                             .AllowAnyHeader()
-                            .AllowAnyMethod();
+                            .AllowAnyMethod()
+                            .AllowAnyOrigin();
                     });
             });
 

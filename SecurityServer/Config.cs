@@ -56,7 +56,24 @@ namespace StsServerIdentity
                         }
                     },
                     UserClaims = { "role", "admin", "user", "gettogetherapiSecret", "gettogetherapiSecret.admin", "gettogetherapiSecret.user" }
-                }
+                },
+                 // example code
+                new ApiResource("hoorayApi")
+                {
+                    ApiSecrets =
+                    {
+                        new Secret("hoorayApiSecret".Sha256())
+                    },
+                    Scopes =
+                    {
+                        new Scope
+                        {
+                            Name = "hooray_Api",
+                            DisplayName = "Scope for the hoorayApi Resource"
+                        }
+                    },
+                    UserClaims = { "role", "admin", "user", "hoorayApiSecret", "hoorayApiSecret.admin", "hoorayApiSecret.user" }
+                },
             };
         }
 
@@ -262,6 +279,46 @@ namespace StsServerIdentity
                     AllowAccessTokensViaBrowser = true,
                     RedirectUris = new List<string>
                     {
+                        "https://localhost:4200",
+                        "http://localhost/callback", // electron,
+                        "https://localhost/callback",  // electron
+                        "https://proud-island-014203c10.azurestaticapps.net",
+                        "gettogetherapp://localhost",
+                    },
+                    PostLogoutRedirectUris = new List<string>
+                    {
+                        "https://localhost:4200/unauthorized",
+                        "https://localhost:4200",
+                        "https://proud-island-014203c10.azurestaticapps.net"
+                    },
+                    AllowedCorsOrigins = new List<string>
+                    {
+                        "https://localhost:4200",
+                        "https://proud-island-014203c10.azurestaticapps.net",
+                        "gettogetherapp://localhost",
+                    },
+
+                    RequireClientSecret = false,
+
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = true,
+                    AllowedScopes = { "openid", "profile", "email", "gettogether_api" },
+
+                    AllowOfflineAccess = true,
+                    RefreshTokenUsage = TokenUsage.OneTimeOnly,
+                 },
+
+                 new Client
+                {
+                    ClientName = "Code Flow with refresh tokens",
+                    ClientId = "angularClientForHoorayApi",
+
+                    AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
+                    IdentityTokenLifetime = 45,
+
+                    AllowAccessTokensViaBrowser = true,
+                    RedirectUris = new List<string>
+                    {
                         "https://localhost:4200"
                     },
                     PostLogoutRedirectUris = new List<string>
@@ -278,11 +335,11 @@ namespace StsServerIdentity
 
                     AllowedGrantTypes = GrantTypes.Code,
                     RequirePkce = true,
-                    AllowedScopes = { "openid", "profile", "email", "gettogether_api" },
+                    AllowedScopes = { "openid", "profile", "email", "hooray_Api" },
 
                     AllowOfflineAccess = true,
-                    RefreshTokenUsage = TokenUsage.OneTimeOnly,
-                 }
+                    RefreshTokenUsage = TokenUsage.OneTimeOnly
+                },
             };
         }
     }
