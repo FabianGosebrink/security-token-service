@@ -336,7 +336,7 @@ namespace StsServerIdentity
 
                     AllowedGrantTypes = GrantTypes.Code,
                     RequirePkce = true,
-                    AllowedScopes = { "openid", "profile", "email", "hooray_Api" },
+                    AllowedScopes = { "openid", "profile", "email", "hooray_Api", IdentityServerConstants.StandardScopes.OfflineAccess },
 
                     AllowOfflineAccess = true,
                     RefreshTokenUsage = TokenUsage.OneTimeOnly
