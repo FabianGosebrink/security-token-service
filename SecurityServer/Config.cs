@@ -284,7 +284,7 @@ namespace StsServerIdentity
                         "http://localhost/callback", // electron,
                         "https://localhost/callback",  // electron
                         "https://proud-island-014203c10.azurestaticapps.net",
-                        "gettogetherapp://localhost",
+                        "gettogetherapp://",
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
@@ -296,7 +296,7 @@ namespace StsServerIdentity
                     {
                         "https://localhost:4200",
                         "https://proud-island-014203c10.azurestaticapps.net",
-                        "gettogetherapp://localhost",
+                        "gettogetherapp://",
                     },
 
                     RequireClientSecret = false,
