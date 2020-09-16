@@ -26,41 +26,27 @@ namespace StsServerIdentity
         private readonly Fido2Storage _fido2Storage;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IOptions<Fido2Configuration> _optionsFido2Configuration;
-        private readonly IOptions<Fido2MdsConfiguration> _optionsFido2MdsConfiguration;
         private readonly IStringLocalizer _sharedLocalizer;
 
         public MfaFido2RegisterController(
-            Fido2Storage fido2Storage, 
+            Fido2Storage fido2Storage,
             UserManager<ApplicationUser> userManager,
             IOptions<Fido2Configuration> optionsFido2Configuration,
-            IOptions<Fido2MdsConfiguration> optionsFido2MdsConfiguration,
             IStringLocalizerFactory factory)
         {
             _userManager = userManager;
             _optionsFido2Configuration = optionsFido2Configuration;
-            _optionsFido2MdsConfiguration = optionsFido2MdsConfiguration;
             _fido2Storage = fido2Storage;
 
             var type = typeof(SharedResource);
             var assemblyName = new AssemblyName(type.GetTypeInfo().Assembly.FullName);
             _sharedLocalizer = factory.Create("SharedResource", assemblyName.Name);
 
-            var MDSCacheDirPath = _optionsFido2MdsConfiguration.Value.MDSCacheDirPath ?? Path.Combine(Path.GetTempPath(), "fido2mdscache"); 
-            _mds = string.IsNullOrEmpty(_optionsFido2MdsConfiguration.Value.MDSAccessKey) ? null : MDSMetadata.Instance(
-                _optionsFido2MdsConfiguration.Value.MDSAccessKey, MDSCacheDirPath);
-            if (null != _mds)
-            {
-                if (false == _mds.IsInitialized())
-                    _mds.Initialize().Wait();
-            }
-
             _lib = new Fido2(new Fido2Configuration()
             {
                 ServerDomain = _optionsFido2Configuration.Value.ServerDomain,
                 ServerName = _optionsFido2Configuration.Value.ServerName,
                 Origin = _optionsFido2Configuration.Value.Origin,
-                // Only create and use Metadataservice if we have an acesskey
-                MetadataService = _mds,
                 TimestampDriftTolerance = _optionsFido2Configuration.Value.TimestampDriftTolerance
             });
         }
@@ -71,6 +57,7 @@ namespace StsServerIdentity
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Route("/mfamakeCredentialOptions")]
         public async Task<JsonResult> MakeCredentialOptions([FromForm] string username, [FromForm] string displayName, [FromForm] string attType, [FromForm] string authType, [FromForm] bool requireResidentKey, [FromForm] string userVerification)
         {
@@ -92,7 +79,7 @@ namespace StsServerIdentity
                 // 2. Get user existing keys by username
                 var items = await _fido2Storage.GetCredentialsByUsername(identityUser.UserName);
                 var existingKeys = new List<PublicKeyCredentialDescriptor>();
-                foreach(var publicKeyCredentialDescriptor in items)
+                foreach (var publicKeyCredentialDescriptor in items)
                 {
                     existingKeys.Add(publicKeyCredentialDescriptor.Descriptor);
                 }
@@ -124,6 +111,7 @@ namespace StsServerIdentity
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Route("/mfamakeCredential")]
         public async Task<JsonResult> MakeCredential([FromBody] AuthenticatorAttestationRawResponse attestationResponse)
         {
