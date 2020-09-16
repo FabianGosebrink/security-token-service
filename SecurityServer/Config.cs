@@ -27,7 +27,6 @@ namespace StsServerIdentity
                 new ApiScope("taler_api", "Scope for the taler_api ApiResource"),
                 new ApiScope("gettogether_api", "Scope for the gettogether_api ApiResource"),
                 new ApiScope("hooray_Api", "Scope for the hooray_Api ApiResource"),
-                
             };
         }
 
@@ -150,7 +149,8 @@ namespace StsServerIdentity
                         "role",
                         "profile",
                         "email",
-                        "taler_api"
+                        "taler_api",
+                         IdentityServerConstants.StandardScopes.OfflineAccess
                     }
                 },
                 new Client
@@ -252,7 +252,13 @@ namespace StsServerIdentity
 
                     AllowedGrantTypes = GrantTypes.Code,
                     RequirePkce = true,
-                    AllowedScopes = { "openid", "profile", "email", "taler_api" },
+                    AllowedScopes = { 
+                        "openid", 
+                        "profile", 
+                        "email", 
+                        "taler_api",
+                        IdentityServerConstants.StandardScopes.OfflineAccess
+                    },
 
                     AllowOfflineAccess = true,
                     RefreshTokenUsage = TokenUsage.OneTimeOnly
@@ -293,7 +299,13 @@ namespace StsServerIdentity
 
                     AllowedGrantTypes = GrantTypes.Code,
                     RequirePkce = true,
-                    AllowedScopes = { "openid", "profile", "email", "gettogether_api", IdentityServerConstants.StandardScopes.OfflineAccess },
+                    AllowedScopes = { 
+                        "openid", 
+                        "profile", 
+                        "email", 
+                        "gettogether_api", 
+                        IdentityServerConstants.StandardScopes.OfflineAccess 
+                    },
 
                     AllowOfflineAccess = true,
                     RefreshTokenUsage = TokenUsage.OneTimeOnly,
@@ -326,7 +338,13 @@ namespace StsServerIdentity
 
                     AllowedGrantTypes = GrantTypes.Code,
                     RequirePkce = true,
-                    AllowedScopes = { "openid", "profile", "email", "hooray_Api", IdentityServerConstants.StandardScopes.OfflineAccess },
+                    AllowedScopes = { 
+                         "openid", 
+                         "profile", 
+                         "email", 
+                         "hooray_Api", 
+                         IdentityServerConstants.StandardScopes.OfflineAccess 
+                     },
 
                     AllowOfflineAccess = true,
                     RefreshTokenUsage = TokenUsage.OneTimeOnly
