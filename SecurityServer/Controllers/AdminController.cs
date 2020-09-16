@@ -29,8 +29,6 @@ namespace StsServerIdentity.Controllers
                 {
                     Email = user.Email,
                     IsAdmin = user.IsAdmin,
-                    DataEventRecordsRole = user.DataEventRecordsRole,
-                    SecuredFilesRole = user.SecuredFilesRole
                 }).ToListAsync());
         }
 
@@ -52,9 +50,7 @@ namespace StsServerIdentity.Controllers
             return View(new AdminViewModel
             {
                 Email = user.Email,
-                IsAdmin = user.IsAdmin,
-                DataEventRecordsRole = user.DataEventRecordsRole,
-                SecuredFilesRole = user.SecuredFilesRole
+                IsAdmin = user.IsAdmin
             });
         }
 
@@ -77,8 +73,6 @@ namespace StsServerIdentity.Controllers
                 {
                     Email = adminViewModel.Email,
                     IsAdmin = adminViewModel.IsAdmin,
-                    DataEventRecordsRole = adminViewModel.DataEventRecordsRole,
-                    SecuredFilesRole = adminViewModel.SecuredFilesRole,
                     UserName = adminViewModel.Email
                 });
                 return RedirectToAction(nameof(Index));
@@ -103,9 +97,7 @@ namespace StsServerIdentity.Controllers
             return View(new AdminViewModel
             {
                 Email = user.Email,
-                IsAdmin = user.IsAdmin,
-                DataEventRecordsRole = user.DataEventRecordsRole,
-                SecuredFilesRole = user.SecuredFilesRole
+                IsAdmin = user.IsAdmin
             });
         }
 
@@ -124,8 +116,6 @@ namespace StsServerIdentity.Controllers
                 {
                     var user = await _userManager.FindByEmailAsync(id);
                     user.IsAdmin = adminViewModel.IsAdmin;
-                    user.DataEventRecordsRole = adminViewModel.DataEventRecordsRole;
-                    user.SecuredFilesRole = adminViewModel.SecuredFilesRole;
 
                     await _userManager.UpdateAsync(user);
                 }
@@ -162,9 +152,7 @@ namespace StsServerIdentity.Controllers
             return View(new AdminViewModel
             {
                 Email = user.Email,
-                IsAdmin = user.IsAdmin,
-                DataEventRecordsRole = user.DataEventRecordsRole,
-                SecuredFilesRole = user.SecuredFilesRole
+                IsAdmin = user.IsAdmin
             });
         }
 

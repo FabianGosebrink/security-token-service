@@ -18,12 +18,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.IsAdmin)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataEventRecordsRole)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SecuredFilesRole)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -35,12 +29,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsAdmin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataEventRecordsRole)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SecuredFilesRole)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Email">Edit</a> |
