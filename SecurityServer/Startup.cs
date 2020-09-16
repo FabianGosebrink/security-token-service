@@ -109,13 +109,15 @@ namespace StsServerIdentity
                  //});
 
             services.AddSingleton<IAuthorizationHandler, IsAdminHandler>();
+
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("IsAdminRequirementPolicy", policyIsAdminRequirement =>
+                options.AddPolicy("IsAdmin", policyIsAdminRequirement =>
                 {
                     policyIsAdminRequirement.Requirements.Add(new IsAdminRequirement());
                 });
             });
+
 
             services.AddAntiforgery(options =>
             {

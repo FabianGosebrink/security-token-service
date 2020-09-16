@@ -31,7 +31,6 @@ namespace StsServerIdentity
             var principal = await _claimsFactory.CreateAsync(user);
 
             var claims = principal.Claims.ToList();
-
             claims = claims.Where(claim => context.RequestedClaimTypes.Contains(claim.Type)).ToList();
             claims.Add(new Claim(JwtClaimTypes.GivenName, user.UserName));
 
@@ -44,16 +43,8 @@ namespace StsServerIdentity
                 claims.Add(new Claim(JwtClaimTypes.Role, "user"));
             }
 
-            if (user.TwoFactorEnabled)
-            {
-                claims.Add(new Claim("amr", "mfa"));
-            }
-            else
-            {
-                claims.Add(new Claim("amr", "pwd")); ;
-            }
-
             claims.Add(new Claim(IdentityServerConstants.StandardScopes.Email, user.Email));
+            claims.Add(new Claim("name", user.Email));
 
             context.IssuedClaims = claims;
         }

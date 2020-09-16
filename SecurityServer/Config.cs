@@ -20,6 +20,17 @@ namespace StsServerIdentity
             };
         }
 
+        public static IEnumerable<ApiScope> GetApiScopes()
+        {
+            return new List<ApiScope>
+            {
+                new ApiScope("taler_api", "Scope for the taler_api ApiResource"),
+                new ApiScope("gettogether_api", "Scope for the gettogether_api ApiResource"),
+                new ApiScope("hooray_Api", "Scope for the hooray_Api ApiResource"),
+                
+            };
+        }
+
         public static IEnumerable<ApiResource> GetApiResources()
         {
             return new List<ApiResource>
@@ -31,14 +42,7 @@ namespace StsServerIdentity
                     {
                         new Secret("talerApiSecret".Sha256())
                     },
-                    Scopes =
-                    {
-                        new Scope
-                        {
-                            Name = "taler_api",
-                            DisplayName = "Scope for the taler ApiResource"
-                        }
-                    },
+                    Scopes = new List<string> { "taler_api" },
                     UserClaims = { "role", "admin", "user", "talerApiSecret", "talerApiSecret.admin", "talerApiSecret.user" }
                 },
                 // example code
@@ -48,14 +52,7 @@ namespace StsServerIdentity
                     {
                         new Secret("gettogetherapiSecret".Sha256())
                     },
-                    Scopes =
-                    {
-                        new Scope
-                        {
-                            Name = "gettogether_api",
-                            DisplayName = "Scope for the getogether ApiResource"
-                        }
-                    },
+                    Scopes = new List<string> { "gettogether_api" },
                     UserClaims = { "role", "admin", "user", "gettogetherapiSecret", "gettogetherapiSecret.admin", "gettogetherapiSecret.user" }
                 },
                  // example code
@@ -64,14 +61,6 @@ namespace StsServerIdentity
                     ApiSecrets =
                     {
                         new Secret("hoorayApiSecret".Sha256())
-                    },
-                    Scopes =
-                    {
-                        new Scope
-                        {
-                            Name = "hooray_Api",
-                            DisplayName = "Scope for the hoorayApi Resource"
-                        }
                     },
                     UserClaims = { "role", "admin", "user", "hoorayApiSecret", "hoorayApiSecret.admin", "hoorayApiSecret.user" }
                 },
