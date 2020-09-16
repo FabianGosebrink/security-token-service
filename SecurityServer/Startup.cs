@@ -109,6 +109,8 @@ namespace StsServerIdentity
                  //});
 
             services.AddSingleton<IAuthorizationHandler, IsAdminHandler>();
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>,
+                AdditionalUserClaimsPrincipalFactory>();
 
             services.AddAuthorization(options =>
             {

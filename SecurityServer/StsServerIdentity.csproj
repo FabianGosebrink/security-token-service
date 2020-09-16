@@ -10,6 +10,7 @@
     <PackageTags>oidc identityserver4 identity aspnetcore</PackageTags>
     <PackageReleaseNotes>FIDO2 Anti-forgery tokens, updated nuget packages 3.1.7, update npm packages
     </PackageReleaseNotes>
+    <UserSecretsId>4ed73e71-fef7-4c6f-87ee-af421e0be80f</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
