@@ -279,11 +279,7 @@ namespace StsServerIdentity
                         "http://localhost/callback", // electron,
                         "https://localhost/callback",  // electron
                         "https://proud-island-014203c10.azurestaticapps.net",
-<<<<<<< HEAD
                         "gatherrapp://localhost",
-=======
-                        "gettogetherapp://callback",
->>>>>>> 9fed9ca9966a19f4e3371bb5bf20cc9f20399e91
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
@@ -296,29 +292,15 @@ namespace StsServerIdentity
                     {
                         "https://localhost:4200",
                         "https://proud-island-014203c10.azurestaticapps.net",
-<<<<<<< HEAD
-                        "gatherrapp://localhost",
-=======
-                        "gettogetherapp://callback",
->>>>>>> 9fed9ca9966a19f4e3371bb5bf20cc9f20399e91
+                        "gatherrapp://localhost"
                     },
 
                     RequireClientSecret = false,
 
                     AllowedGrantTypes = GrantTypes.Code,
                     RequirePkce = true,
-<<<<<<< HEAD
-                    AllowedScopes = { "openid", "profile", "email", "gatherr_api" },
-=======
-                    AllowedScopes = { 
-                        "openid", 
-                        "profile", 
-                        "email", 
-                        "gettogether_api", 
-                        IdentityServerConstants.StandardScopes.OfflineAccess 
-                    },
->>>>>>> 9fed9ca9966a19f4e3371bb5bf20cc9f20399e91
-
+                    AllowedScopes = { "openid", "profile", "email", "gatherr_api",
+                        IdentityServerConstants.StandardScopes.OfflineAccess  },
                     AllowOfflineAccess = true,
                     RefreshTokenUsage = TokenUsage.OneTimeOnly,
                  },
