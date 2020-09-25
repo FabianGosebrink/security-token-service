@@ -27,6 +27,7 @@ using Microsoft.AspNetCore.Http;
 using Fido2NetLib;
 using Microsoft.AspNetCore.Authorization;
 using StsServerIdentity.Model;
+using Microsoft.IdentityModel.Logging;
 
 namespace StsServerIdentity
 {
@@ -108,13 +109,17 @@ namespace StsServerIdentity
                  //});
 
             services.AddSingleton<IAuthorizationHandler, IsAdminHandler>();
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>,
+                AdditionalUserClaimsPrincipalFactory>();
+
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("IsAdminRequirementPolicy", policyIsAdminRequirement =>
+                options.AddPolicy("IsAdmin", policyIsAdminRequirement =>
                 {
                     policyIsAdminRequirement.Requirements.Add(new IsAdminRequirement());
                 });
             });
+
 
             services.AddAntiforgery(options =>
             {
@@ -144,6 +149,7 @@ namespace StsServerIdentity
                 .AddSigningCredential(x509Certificate2Certs.ActiveCertificate)
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiResources(Config.GetApiResources())
+                .AddInMemoryApiScopes(Config.GetApiScopes())
                 .AddInMemoryClients(Config.GetClients(stsConfig))
                 .AddAspNetIdentity<ApplicationUser>()
                 .AddProfileService<IdentityWithAdditionalClaimsProfileService>();
@@ -169,6 +175,8 @@ namespace StsServerIdentity
 
         public void Configure(IApplicationBuilder app)
         {
+            IdentityModelEventSource.ShowPII = true;
+
             app.UseCookiePolicy();
 
             if (_environment.IsDevelopment())

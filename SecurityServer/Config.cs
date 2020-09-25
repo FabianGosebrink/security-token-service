@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
+using IdentityServer4;
 using IdentityServer4.Models;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
@@ -19,6 +20,16 @@ namespace StsServerIdentity
             };
         }
 
+        public static IEnumerable<ApiScope> GetApiScopes()
+        {
+            return new List<ApiScope>
+            {
+                new ApiScope("taler_api", "Scope for the taler_api ApiResource"),
+                new ApiScope("gettogether_api", "Scope for the gettogether_api ApiResource"),
+                new ApiScope("hooray_Api", "Scope for the hooray_Api ApiResource"),
+            };
+        }
+
         public static IEnumerable<ApiResource> GetApiResources()
         {
             return new List<ApiResource>
@@ -30,14 +41,7 @@ namespace StsServerIdentity
                     {
                         new Secret("talerApiSecret".Sha256())
                     },
-                    Scopes =
-                    {
-                        new Scope
-                        {
-                            Name = "taler_api",
-                            DisplayName = "Scope for the taler ApiResource"
-                        }
-                    },
+                    Scopes = new List<string> { "taler_api" },
                     UserClaims = { "role", "admin", "user", "talerApiSecret", "talerApiSecret.admin", "talerApiSecret.user" }
                 },
                 // example code
@@ -47,14 +51,7 @@ namespace StsServerIdentity
                     {
                         new Secret("gatherrapiSecret".Sha256())
                     },
-                    Scopes =
-                    {
-                        new Scope
-                        {
-                            Name = "gatherr_api",
-                            DisplayName = "Scope for the getogether ApiResource"
-                        }
-                    },
+                    Scopes = new List<string> { "gatherr_api" },
                     UserClaims = { "role", "admin", "user", "gatherrapiSecret", "gatherrapiSecret.admin", "gatherrapiSecret.user" }
                 },
                  // example code
@@ -63,14 +60,6 @@ namespace StsServerIdentity
                     ApiSecrets =
                     {
                         new Secret("hoorayApiSecret".Sha256())
-                    },
-                    Scopes =
-                    {
-                        new Scope
-                        {
-                            Name = "hooray_Api",
-                            DisplayName = "Scope for the hoorayApi Resource"
-                        }
                     },
                     UserClaims = { "role", "admin", "user", "hoorayApiSecret", "hoorayApiSecret.admin", "hoorayApiSecret.user" }
                 },
@@ -160,7 +149,8 @@ namespace StsServerIdentity
                         "role",
                         "profile",
                         "email",
-                        "taler_api"
+                        "taler_api",
+                         IdentityServerConstants.StandardScopes.OfflineAccess
                     }
                 },
                 new Client
@@ -262,7 +252,13 @@ namespace StsServerIdentity
 
                     AllowedGrantTypes = GrantTypes.Code,
                     RequirePkce = true,
-                    AllowedScopes = { "openid", "profile", "email", "taler_api" },
+                    AllowedScopes = { 
+                        "openid", 
+                        "profile", 
+                        "email", 
+                        "taler_api",
+                        IdentityServerConstants.StandardScopes.OfflineAccess
+                    },
 
                     AllowOfflineAccess = true,
                     RefreshTokenUsage = TokenUsage.OneTimeOnly
@@ -283,26 +279,45 @@ namespace StsServerIdentity
                         "http://localhost/callback", // electron,
                         "https://localhost/callback",  // electron
                         "https://proud-island-014203c10.azurestaticapps.net",
+<<<<<<< HEAD
                         "gatherrapp://localhost",
+=======
+                        "gettogetherapp://callback",
+>>>>>>> 9fed9ca9966a19f4e3371bb5bf20cc9f20399e91
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
                         "https://localhost:4200/unauthorized",
                         "https://localhost:4200",
-                        "https://proud-island-014203c10.azurestaticapps.net"
+                        "https://proud-island-014203c10.azurestaticapps.net",
+                        "gettogetherapp://callback",
                     },
                     AllowedCorsOrigins = new List<string>
                     {
                         "https://localhost:4200",
                         "https://proud-island-014203c10.azurestaticapps.net",
+<<<<<<< HEAD
                         "gatherrapp://localhost",
+=======
+                        "gettogetherapp://callback",
+>>>>>>> 9fed9ca9966a19f4e3371bb5bf20cc9f20399e91
                     },
 
                     RequireClientSecret = false,
 
                     AllowedGrantTypes = GrantTypes.Code,
                     RequirePkce = true,
+<<<<<<< HEAD
                     AllowedScopes = { "openid", "profile", "email", "gatherr_api" },
+=======
+                    AllowedScopes = { 
+                        "openid", 
+                        "profile", 
+                        "email", 
+                        "gettogether_api", 
+                        IdentityServerConstants.StandardScopes.OfflineAccess 
+                    },
+>>>>>>> 9fed9ca9966a19f4e3371bb5bf20cc9f20399e91
 
                     AllowOfflineAccess = true,
                     RefreshTokenUsage = TokenUsage.OneTimeOnly,
@@ -335,7 +350,13 @@ namespace StsServerIdentity
 
                     AllowedGrantTypes = GrantTypes.Code,
                     RequirePkce = true,
-                    AllowedScopes = { "openid", "profile", "email", "hooray_Api" },
+                    AllowedScopes = { 
+                         "openid", 
+                         "profile", 
+                         "email", 
+                         "hooray_Api", 
+                         IdentityServerConstants.StandardScopes.OfflineAccess 
+                     },
 
                     AllowOfflineAccess = true,
                     RefreshTokenUsage = TokenUsage.OneTimeOnly
