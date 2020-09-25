@@ -25,7 +25,7 @@ namespace StsServerIdentity
             return new List<ApiScope>
             {
                 new ApiScope("taler_api", "Scope for the taler_api ApiResource"),
-                new ApiScope("gettogether_api", "Scope for the gettogether_api ApiResource"),
+                new ApiScope("gatherr_api", "Scope for the gatherr_api ApiResource"),
                 new ApiScope("hooray_Api", "Scope for the hooray_Api ApiResource"),
             };
         }
@@ -286,7 +286,7 @@ namespace StsServerIdentity
                         "https://localhost:4200/unauthorized",
                         "https://localhost:4200",
                         "https://proud-island-014203c10.azurestaticapps.net",
-                        "gettogetherapp://callback",
+                        "gatherrapp://callback",
                     },
                     AllowedCorsOrigins = new List<string>
                     {
