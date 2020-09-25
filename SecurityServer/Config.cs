@@ -41,21 +41,21 @@ namespace StsServerIdentity
                     UserClaims = { "role", "admin", "user", "talerApiSecret", "talerApiSecret.admin", "talerApiSecret.user" }
                 },
                 // example code
-                new ApiResource("gettogetherapi")
+                new ApiResource("gatherrapi")
                 {
                     ApiSecrets =
                     {
-                        new Secret("gettogetherapiSecret".Sha256())
+                        new Secret("gatherrapiSecret".Sha256())
                     },
                     Scopes =
                     {
                         new Scope
                         {
-                            Name = "gettogether_api",
+                            Name = "gatherr_api",
                             DisplayName = "Scope for the getogether ApiResource"
                         }
                     },
-                    UserClaims = { "role", "admin", "user", "gettogetherapiSecret", "gettogetherapiSecret.admin", "gettogetherapiSecret.user" }
+                    UserClaims = { "role", "admin", "user", "gatherrapiSecret", "gatherrapiSecret.admin", "gatherrapiSecret.user" }
                 },
                  // example code
                 new ApiResource("hoorayApi")
@@ -270,8 +270,8 @@ namespace StsServerIdentity
 
                 new Client
                 {
-                    ClientName = "get together app",
-                    ClientId = "gettogetherapp",
+                    ClientName = "gatherrapi app",
+                    ClientId = "gatherrapp",
 
                     AccessTokenLifetime = 660,
                     IdentityTokenLifetime = 600,
@@ -283,7 +283,7 @@ namespace StsServerIdentity
                         "http://localhost/callback", // electron,
                         "https://localhost/callback",  // electron
                         "https://proud-island-014203c10.azurestaticapps.net",
-                        "gettogetherapp://localhost",
+                        "gatherrapp://localhost",
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
@@ -295,14 +295,14 @@ namespace StsServerIdentity
                     {
                         "https://localhost:4200",
                         "https://proud-island-014203c10.azurestaticapps.net",
-                        "gettogetherapp://localhost",
+                        "gatherrapp://localhost",
                     },
 
                     RequireClientSecret = false,
 
                     AllowedGrantTypes = GrantTypes.Code,
                     RequirePkce = true,
-                    AllowedScopes = { "openid", "profile", "email", "gettogether_api" },
+                    AllowedScopes = { "openid", "profile", "email", "gatherr_api" },
 
                     AllowOfflineAccess = true,
                     RefreshTokenUsage = TokenUsage.OneTimeOnly,
