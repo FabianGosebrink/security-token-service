@@ -5,6 +5,7 @@
 }
 @inject IOptions<StsConfig> OptionsStsConfig
 
+
 @if (User.Identity.IsAuthenticated)
 {
     <h1>Hi @User.Identity.Name</h1>
@@ -41,5 +42,3 @@ else
 <a href="https://localhost:4204">
     sample-code-flow-refresh-tokens (angularCodeRefreshTokens)
 </a>
-
-

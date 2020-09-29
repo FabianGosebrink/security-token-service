@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace StsServerIdentity
@@ -13,7 +14,8 @@ namespace StsServerIdentity
             if (requirement == null)
                 throw new ArgumentNullException(nameof(requirement));
 
-            if (context.User.Identity.Name != null && context.User.Identity.Name.ToLower() == "fabian.gosebrink@outlook.com")
+            var adminClaim = context.User.Claims.FirstOrDefault(t => t.Value == "admin" && t.Type == "role");
+            if (adminClaim != null)
             {
                 context.Succeed(requirement);
             }

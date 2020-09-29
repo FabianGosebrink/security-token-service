@@ -109,13 +109,17 @@ namespace StsServerIdentity
                  //});
 
             services.AddSingleton<IAuthorizationHandler, IsAdminHandler>();
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>,
+                AdditionalUserClaimsPrincipalFactory>();
+
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("IsAdminRequirementPolicy", policyIsAdminRequirement =>
+                options.AddPolicy("IsAdmin", policyIsAdminRequirement =>
                 {
                     policyIsAdminRequirement.Requirements.Add(new IsAdminRequirement());
                 });
             });
+
 
             services.AddAntiforgery(options =>
             {
@@ -145,6 +149,7 @@ namespace StsServerIdentity
                 .AddSigningCredential(x509Certificate2Certs.ActiveCertificate)
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiResources(Config.GetApiResources())
+                .AddInMemoryApiScopes(Config.GetApiScopes())
                 .AddInMemoryClients(Config.GetClients(stsConfig))
                 .AddAspNetIdentity<ApplicationUser>()
                 .AddProfileService<IdentityWithAdditionalClaimsProfileService>();
