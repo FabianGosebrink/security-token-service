@@ -301,7 +301,7 @@ namespace StsServerIdentity
                     },
 
                     RequireClientSecret = false,
-
+                    AlwaysIncludeUserClaimsInIdToken = true,
                     AllowedGrantTypes = GrantTypes.Code,
                     RequirePkce = true,
                     AllowedScopes = { "openid", "profile", "email", "gettogether_api", IdentityServerConstants.StandardScopes.OfflineAccess },
