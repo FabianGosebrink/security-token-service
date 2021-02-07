@@ -203,7 +203,9 @@ namespace StsServerIdentity
                     "https://localhost:4201", 
                     "https://localhost:4202", 
                     "https://localhost:4203", 
-                    "https://localhost:4204", 
+                    "https://localhost:4204",
+                    "https://localhost:4205",
+                    "https://localhost:4206",
                     "https://offeringsolutions-sts.azurewebsites.net"))
                 .ImageSources(imageSrc => imageSrc.Self())
                 .ImageSources(imageSrc => imageSrc.CustomSources("data:"))

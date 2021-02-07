@@ -90,16 +90,21 @@ namespace StsServerIdentity
                     RedirectUris = new List<string>
                     {
                         "https://localhost:4200",
-                        "https://localhost:4200/silent-renew.html"
+                        "https://localhost:4200/silent-renew.html",
+                        "https://localhost:4205",
+                        "https://localhost:4205/silent-renew.html"
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
                         "https://localhost:4200/unauthorized",
-                        "https://localhost:4200"
+                        "https://localhost:4200",
+                        "https://localhost:4205/unauthorized",
+                        "https://localhost:4205"
                     },
                     AllowedCorsOrigins = new List<string>
                     {
-                        "https://localhost:4200"
+                        "https://localhost:4200",
+                        "https://localhost:4205"
                     },
                     AllowedScopes = new List<string>
                     {
@@ -236,16 +241,20 @@ namespace StsServerIdentity
                     AllowAccessTokensViaBrowser = true,
                     RedirectUris = new List<string>
                     {
-                        "https://localhost:4204"
+                        "https://localhost:4204",
+                        "https://localhost:4206"
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
                         "https://localhost:4204/unauthorized",
-                        "https://localhost:4204"
+                        "https://localhost:4204",
+                        "https://localhost:4206/unauthorized",
+                        "https://localhost:4206"
                     },
                     AllowedCorsOrigins = new List<string>
                     {
-                        "https://localhost:4204"
+                        "https://localhost:4204",
+                        "https://localhost:4206"
                     },
 
                     RequireClientSecret = false,
