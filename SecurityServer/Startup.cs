@@ -147,7 +147,7 @@ namespace StsServerIdentity
             var stsConfig = _configuration.GetSection("StsConfig");
 
             var ecdsaCertificate = new X509Certificate2(
-                Path.Combine(_environment.ContentRootPath, "cert_ecdsa256.pfx"), "1234");
+               Path.Combine(_environment.ContentRootPath, "cert_ecdsa256.pfx"), "1234");
             //Path.Combine(_environment.ContentRootPath, "cert_ecdsa384.pfx"), "1234");
             //Path.Combine(_environment.ContentRootPath, "cert_rsa256.pfx"), "1234");
             //Path.Combine(_environment.ContentRootPath, "cert_rsa384.pfx"), "1234");
@@ -160,10 +160,12 @@ namespace StsServerIdentity
             //    = new RsaSecurityKey(ecdsaCertificate.GetRSAPrivateKey());
 
             var identityServer = services.AddIdentityServer()
-                 // .AddSigningCredential(x509Certificate2Certs.ActiveCertificate)
+                // .AddSigningCredential(x509Certificate2Certs.ActiveCertificate)
                 .AddSigningCredential(ecdsaCertificatePublicKey, ECDsaSigningAlgorithm.ES256)
                 // .AddSigningCredential(ecdsaCertificatePublicKey, ECDsaSigningAlgorithm.ES384)
-                // .AddSigningCredential(ecdsaCertificatePublicKey, ECDsaSigningAlgorithm.ES512)
+                // .AddSigningCredential(rsaCertificatePublicKey, RsaSigningAlgorithm.RS256)
+                //.AddSigningCredential(rsaCertificatePublicKey, RsaSigningAlgorithm.RS384)
+                //.AddSigningCredential(rsaCertificatePublicKey, RsaSigningAlgorithm.RS512)
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiResources(Config.GetApiResources())
                 .AddInMemoryApiScopes(Config.GetApiScopes())
