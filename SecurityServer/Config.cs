@@ -79,8 +79,8 @@ namespace StsServerIdentity
                     ClientId = "angularClient",
                     AccessTokenType = AccessTokenType.Reference,
                     // RequireConsent = false,
-                    AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
-                    IdentityTokenLifetime = 30,
+                    AccessTokenLifetime = 900,// 900 seconds, default 60 minutes
+                    IdentityTokenLifetime = 600,
 
                     RequireClientSecret = false,
                     AllowedGrantTypes = GrantTypes.Code,
@@ -121,8 +121,8 @@ namespace StsServerIdentity
                     ClientId = "talerClient",
                     AccessTokenType = AccessTokenType.Reference,
                     // RequireConsent = false,
-                    AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
-                    IdentityTokenLifetime = 30,
+                    AccessTokenLifetime = 900,// 900 seconds, default 60 minutes
+                    IdentityTokenLifetime = 600,
 
                     RequireClientSecret = false,
                     AllowedGrantTypes = GrantTypes.Code,
@@ -164,8 +164,8 @@ namespace StsServerIdentity
                     ClientId = "angularImplicitClient",
                     AccessTokenType = AccessTokenType.Reference,
                     // RequireConsent = false,
-                    AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
-                    IdentityTokenLifetime = 30,
+                    AccessTokenLifetime = 900,// 900 seconds, default 60 minutes
+                    IdentityTokenLifetime = 600,
 
                     RequireClientSecret = false,
                     AllowedGrantTypes = GrantTypes.Implicit,
@@ -200,8 +200,8 @@ namespace StsServerIdentity
                     ClientId = "angularJwtClient",
                     AccessTokenType = AccessTokenType.Jwt,
                     // RequireConsent = false,
-                    AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
-                    IdentityTokenLifetime = 30,
+                    AccessTokenLifetime = 900,// 900 seconds, default 60 minutes
+                    IdentityTokenLifetime = 600,
 
                     RequireClientSecret = false,
                     AllowedGrantTypes = GrantTypes.Code,
@@ -235,8 +235,8 @@ namespace StsServerIdentity
                     ClientName = "Code Flow Refresh Tokens(Code with PKCE)",
                     ClientId = "angularCodeRefreshTokens",
 
-                    AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
-                    IdentityTokenLifetime = 45,
+                    AccessTokenLifetime = 900,// 900 seconds, default 60 minutes
+                    IdentityTokenLifetime = 600,
 
                     AllowAccessTokensViaBrowser = true,
                     RedirectUris = new List<string>
@@ -278,7 +278,7 @@ namespace StsServerIdentity
                     ClientName = "gatherrapi app",
                     ClientId = "gatherrapp",
 
-                    AccessTokenLifetime = 660,
+                    AccessTokenLifetime = 900,// 900 seconds, default 60 minutes
                     IdentityTokenLifetime = 600,
 
                     AllowAccessTokensViaBrowser = true,
@@ -319,8 +319,8 @@ namespace StsServerIdentity
                     ClientName = "Code Flow with refresh tokens",
                     ClientId = "angularClientForHoorayApi",
 
-                    AccessTokenLifetime = 330,// 330 seconds, default 60 minutes
-                    IdentityTokenLifetime = 45,
+                    AccessTokenLifetime = 900,// 900 seconds, default 60 minutes
+                    IdentityTokenLifetime = 600,
 
                     AllowAccessTokensViaBrowser = true,
                     RedirectUris = new List<string>
