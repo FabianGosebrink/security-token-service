@@ -242,6 +242,7 @@ namespace StsServerIdentity
                     RedirectUris = new List<string>
                     {
                         "https://localhost:4204",
+                        "https://localhost:4204/callback",
                         "https://localhost:4206"
                     },
                     PostLogoutRedirectUris = new List<string>
